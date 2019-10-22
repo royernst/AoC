@@ -45,7 +45,7 @@ let santa = [0, 0];
 let robo = [0, 0];
 
 inputs.forEach(input => {
-
+    debugger;
     input = input.split("");
     runPositionCheck(santa, input[0]);
     runPositionCheck(robo, input[1]);
@@ -79,8 +79,7 @@ function updatePosition(position, direction) {
 
 function positionVisited(currentPosition) {
     let visited = pastResults.filter(pastResult => pastResult[0] === currentPosition[0] && pastResult[1] === currentPosition[1]);
-
-    return !!visited;
+    return !!visited.length;
 }
 
 console.log(pastResults.length);
