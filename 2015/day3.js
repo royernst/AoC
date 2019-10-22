@@ -41,25 +41,46 @@ inputs = inputs.filter(input => {
 let pastResults = [
     [0, 0]
 ];
-let santaPosition = [0, 0];
-let roboPosition = [0, 0];
+let santa = [0, 0];
+let robo = [0, 0];
 
 inputs.forEach(input => {
-            //     switch (input) {
-            //         case ">":
-            //             position[0]++;
-            //             break;
-            //         case "<":
-            //             position[0]--;
-            //             break;
-            //         case "^":
-            //             position[1]++;
-            //             break;
-            //         case "v":
-            //             position[1]--;
-            //             break;
-            //         default:
-            //             console.log("Case switch failed");
-            //     }
 
-            console.log(inputs);
+    input = input.split("");
+    runPositionCheck(santa, input[0]);
+    runPositionCheck(robo, input[1]);
+});
+
+function runPositionCheck(actorPosition, direction) {
+    actorPosition = updatePosition(actorPosition, direction);
+    let currentPosition = [...actorPosition];
+    if (!positionVisited(currentPosition)) pastResults.push(currentPosition);
+}
+
+function updatePosition(position, direction) {
+    switch (direction) {
+        case ">":
+            position[0]++;
+            break;
+        case "<":
+            position[0]--;
+            break;
+        case "^":
+            position[1]++;
+            break;
+        case "v":
+            position[1]--;
+            break;
+        default:
+            console.log("Case switch failed");
+    }
+    return position;
+}
+
+function positionVisited(currentPosition) {
+    let visited = pastResults.filter(pastResult => pastResult[0] === currentPosition[0] && pastResult[1] === currentPosition[1]);
+
+    return !!visited;
+}
+
+console.log(pastResults.length);
